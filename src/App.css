@@ -1,0 +1,20 @@
+.app-wrapper {
+  display: grid;
+
+  grid-template-areas:
+    "head head"
+    "nav cont";
+
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 16fr;
+
+  font-family: 'Nunito', sans-serif;
+  font-weight: bolder;
+
+}
+
+.app-wrapper-content {
+
+  grid-area: cont;
+  background-color: #907fa4;
+}
