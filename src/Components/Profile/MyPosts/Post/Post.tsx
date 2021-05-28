@@ -9,7 +9,9 @@ const Post = (props: PropsType) => {
     return (
 
         <div className={s.item}>
-            <img src="https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg" alt=""/>
+           <div className={s.img} >
+               <img src="https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg" alt=""/>
+           </div>
             {props.message}
             <div>
                 <span>like</span>
