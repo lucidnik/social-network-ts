@@ -1,31 +1,21 @@
 import React from "react";
 import s from './Dialogs.module.css';
 import Message from "./Message/Message";
+import {DialogsType, MessagesType} from "../../State";
 import DialogItem from "./DialogsItem/DialogsItem";
 
-let dialogs = [
-    {id: 1, name: 'Nikita'},
-    {id: 1, name: 'Valera'},
-    {id: 1, name: 'Andrei'},
-    {id: 1, name: 'Viktor'},
-    {id: 1, name: 'Angelo'}
-];
+type PropsType = {
+    dialogs: DialogsType[]
+    messages: MessagesType[]
+}
 
-let messages = [
-    {message: 'Sup', likesCount: 1,},
-    {message: 'Yo', likesCount: 1,},
-    {message: 'Hey', likesCount: 1,},
-    {message: 'Hi', likesCount: 1,},
-    {message: 'Howdy', likesCount: 1,},
 
-];
+const Dialogs = (props: PropsType) => {
 
-const Dialogs = () => {
-
-    let dialogsElements = dialogs.map(element =>
+    let dialogsElements = props.dialogs.map(element =>
         <DialogItem name={element.name} id={element.id}/>);
 
-    let messagesElements = messages.map(element =>
+    let messagesElements = props.messages.map(element =>
         <Message message={element.message} likesCount={element.likesCount}/>);
 
     return (

@@ -1,17 +1,15 @@
 import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
+import {PostsType} from "../../../State";
 
-let posts = [
-    {id: 1, message: 'sup bruv'},
-    {id: 2, message: 'Alex Jones'},
-    {id: 3, message: 'Media'},
-    {id: 4, message: 'Naruto'},
-];
+type PropsType = {
+    posts: PostsType[]
+}
 
-let postsElements = posts.map(elements => <Post id-={elements.id} message={elements.message}/>);
+const MyPosts = (props: PropsType) => {
 
-const MyPosts = () => {
+    let postsElements = props.posts.map(elements => <Post id-={elements.id} message={elements.message}/>);
     return (
         <div className={s.postsBlock}>
             My Posts
