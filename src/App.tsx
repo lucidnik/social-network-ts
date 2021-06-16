@@ -5,13 +5,20 @@ import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Components/Profile/Profile";
 import Dialogs from "./Components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {state} from "./State";
+import {RootStateType} from "./redux/State";
 
-const App = () => {
+type PropsType = {
+    state: RootStateType
+    addPost: (postText: string) => void
+    newPostText: string
+    changeText: (newText: string) => void
+}
 
-    const posts = state.profilePage.posts
-    const dialogs = state.dialogsPage.dialogs
-    const messages = state.dialogsPage.messages
+const App = (props: PropsType) => {
+
+    const posts = props.state.profilePage.posts;
+    const dialogs = props.state.dialogsPage.dialogs;
+    const messages = props.state.dialogsPage.messages;
 
 
     return (
@@ -21,8 +28,8 @@ const App = () => {
                 <Navbar/>
                 <div className="app-wrapper-content">
 
-                    <Route path={'/profile'} render={() => <Profile posts={posts} />}/>
-                    <Route path={'/dialogs'} render={() => <Dialogs messages={messages} dialogs={dialogs} />}/>
+                    <Route path={'/profile'} render={() => <Profile posts={posts} addPost={props.addPost} newPostText={props.newPostText} changeText={props.changeText} />}/>
+                    <Route path={'/dialogs'} render={() => <Dialogs messages={messages} dialogs={dialogs}/>}/>
                 </div>
             </div>
         </BrowserRouter>
