@@ -1,5 +1,3 @@
-import {rerenderEntireTree} from "../render";
-
 export type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
@@ -66,13 +64,19 @@ export const addPost = (postText: string) => {
         likesCount: 1
     };
     state.profilePage.posts.push(newPost);
-    state.profilePage.newPostText = ''
-
-    rerenderEntireTree(state);
+    state.profilePage.newPostText = '';
+    rerenderEntireTree();
 };
 
 export const changeText = (newText: string) => {
     state.profilePage.newPostText = newText;
-    rerenderEntireTree(state);
+    rerenderEntireTree();
 
 };
+
+let rerenderEntireTree = () => {};
+
+export const subscribe = (observer: () => void) => {
+    rerenderEntireTree = observer;
+};
+
