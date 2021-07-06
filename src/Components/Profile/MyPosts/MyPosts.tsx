@@ -1,26 +1,27 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import { PostsType} from "../../../redux/State";
+import {ActionTypes, addPostAC, PostsType, updateNewPostAC} from "../../../redux/Store";
 
 type PropsType = {
     posts: PostsType[]
-    addPost: (postText: string) => void
     newPostText: string
-    changeText: (newText: string) => void
+    dispatch: (action: ActionTypes) => void
 }
+
+
 
 const MyPosts = (props: PropsType) => {
 
 
     const addPostCallback = () => {
-      props.addPost(props.newPostText)
+        props.dispatch(addPostAC(props.newPostText));
     };
 
     const onChangeCallback = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        let newText = event.currentTarget.value
-        props.changeText(newText)
-    }
+        let newText = event.currentTarget.value;
+        props.dispatch(updateNewPostAC(newText));
+    };
 
 
     let postsElements = props.posts.map(elements =>
@@ -32,7 +33,7 @@ const MyPosts = (props: PropsType) => {
         <div className={s.postsBlock}>
             My Posts
             <div>
-                <textarea className={s.textArea} value={props.newPostText} onChange={onChangeCallback} />
+                <textarea className={s.textArea} value={props.newPostText} onChange={onChangeCallback}/>
                 <button className={s.addPostBtn} onClick={addPostCallback}>Add Post</button>
             </div>
             <div className={s.posts}>
