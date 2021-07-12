@@ -5,7 +5,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Components/Profile/Profile";
 import Dialogs from "./Components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {ActionTypes, RootStateType} from "./redux/Store";
+import {ActionTypes, RootStateType} from "./redux/ReduxStore";
 
 type PropsType = {
     state: RootStateType
@@ -13,12 +13,13 @@ type PropsType = {
 }
 
 const App = (props: PropsType) => {
+    debugger
 
-    const posts = props.state.profilePage.posts;
-    const dialogs = props.state.dialogsPage.dialogs;
-    const messages = props.state.dialogsPage.messages;
-    let newPostText = props.state.profilePage.newPostText;
-    let newMessageText = props.state.dialogsPage.newMessageText
+    const dialogs = props.state.dialogsReducer.dialogs
+    const messages = props.state.dialogsReducer.messages
+    let newMessageText = props.state.dialogsReducer.newMessageText
+    let newPostText = props.state.profileReducer.newPostText
+    const posts = props.state.profileReducer.posts
 
 
     return (
