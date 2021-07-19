@@ -1,27 +1,28 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {addPostAC, PostsType, updateNewPostAC} from "../../../redux/ProfileReducer";
-import {ActionTypes} from "../../../redux/ReduxStore";
+import {PostsType} from "../../../redux/ProfileReducer";
 
 type PropsType = {
     posts: PostsType[]
     newPostText: string
-    dispatch: (action: ActionTypes) => void
+    onChangeCallback: (newText: string) => void
+    addPostCallback: () => void
 }
-
 
 
 const MyPosts = (props: PropsType) => {
 
 
-    const addPostCallback = () => {
-        props.dispatch(addPostAC(props.newPostText));
+    const addPost = () => {
+        props.addPostCallback();
+        //   props.dispatch(addPostAC(props.newPostText));
     };
 
-    const onChangeCallback = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const onChangePost = (event: ChangeEvent<HTMLTextAreaElement>) => {
         let newText = event.currentTarget.value;
-        props.dispatch(updateNewPostAC(newText));
+        props.onChangeCallback(newText);
+        //     props.dispatch(updateNewPostAC(newText));
     };
 
 
@@ -34,8 +35,8 @@ const MyPosts = (props: PropsType) => {
         <div className={s.postsBlock}>
             My Posts
             <div>
-                <textarea className={s.textArea} value={props.newPostText} onChange={onChangeCallback}/>
-                <button className={s.addPostBtn} onClick={addPostCallback}>Add Post</button>
+                <textarea className={s.textArea} value={props.newPostText} onChange={onChangePost}/>
+                <button className={s.addPostBtn} onClick={addPost}>Add Post</button>
             </div>
             <div className={s.posts}>
                 {postsElements}

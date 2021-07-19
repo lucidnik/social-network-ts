@@ -2,14 +2,15 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogItem from "./DialogsItem/DialogsItem";
-import {addMessageAC, DialogsType, MessagesType, updateNewMessageAC} from "../../redux/DialogsReducer";
-import {ActionTypes} from "../../redux/ReduxStore";
+import { DialogsType, MessagesType} from "../../redux/DialogsReducer";
 
 type PropsType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
     newMessageText: string
-    dispatch: (action: ActionTypes) => void
+    addMessageCallback: () => void
+    onChangeMessageCallback: (newText: string) => void
+
 }
 
 
@@ -21,13 +22,15 @@ const Dialogs = (props: PropsType) => {
     let messagesElements = props.messages.map(element =>
         <Message message={element.message} likesCount={element.likesCount}/>);
 
-    const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        let newText = e.currentTarget.value;
-        props.dispatch(updateNewMessageAC(newText));
+    const addMessage = () => {
+        props.addMessageCallback()
+        //  props.dispatch(addMessageAC(props.newMessageText));
     };
 
-    const addMessageCallback = () => {
-        props.dispatch(addMessageAC(props.newMessageText));
+    const onChangeMessage = (e: ChangeEvent<HTMLInputElement>) => {
+        let newText = e.currentTarget.value;
+        props.onChangeMessageCallback(newText)
+       // props.dispatch(updateNewMessageAC(newText));
     };
 
     return (
@@ -40,8 +43,8 @@ const Dialogs = (props: PropsType) => {
                 {messagesElements}
             </div>
             <div>
-                <input onChange={onChangeCallback} type="text" value={props.newMessageText}/>
-                <button onClick={addMessageCallback}>send message</button>
+                <input onChange={onChangeMessage} type="text" value={props.newMessageText}/>
+                <button onClick={addMessage}>send message</button>
             </div>
         </div>
     );
