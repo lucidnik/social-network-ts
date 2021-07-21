@@ -1,6 +1,6 @@
 import {combineReducers, createStore} from "redux";
-import {addMessageAC, DialogsPageType, dialogsReducer, updateNewMessageAC} from "./DialogsReducer";
-import {addPostAC, ProfilePageType, profileReducer, updateNewPostAC} from "./ProfileReducer";
+import {addMessageAC, dialogsReducer, updateNewMessageAC} from "./DialogsReducer";
+import {addPostAC, profileReducer, updateNewPostAC} from "./ProfileReducer";
 
 export type ActionTypes =
     ReturnType<typeof addPostAC>
@@ -8,14 +8,11 @@ export type ActionTypes =
     | ReturnType<typeof addMessageAC>
     | ReturnType<typeof updateNewMessageAC>
 
-export type RootStateType = {
-    profileReducer: ProfilePageType
-    dialogsReducer: DialogsPageType
-}
+export type RootStateType = ReturnType<typeof rootReducer>
 
-let reducers = combineReducers({
-    dialogsReducer,
-    profileReducer
+let rootReducer = combineReducers({
+    dialogsPage: dialogsReducer,
+    profilePage: profileReducer
 });
 
-export let store = createStore(reducers);
+export let store = createStore(rootReducer);

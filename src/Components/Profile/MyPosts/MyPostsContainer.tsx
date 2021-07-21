@@ -1,28 +1,39 @@
 import React from "react";
-import {addPostAC, PostsType, updateNewPostAC} from "../../../redux/ProfileReducer";
-import {ActionTypes} from "../../../redux/ReduxStore";
+import {addPostAC, ProfilePageType, updateNewPostAC} from "../../../redux/ProfileReducer";
+import { RootStateType} from "../../../redux/ReduxStore";
 import MyPosts from "./MyPosts";
+import {connect} from "react-redux";
+import {Dispatch} from "redux";
 
-type PropsType = {
-    posts: PostsType[]
-    newPostText: string
-    dispatch: (action: ActionTypes) => void
+type MapStatePropsType = {
+    profilePage: ProfilePageType
+}
+
+type MapDispatchToPropsType = {
+    addPostCallback: (newPostText: string) => void
+    onChangeCallback: (newText: string) => void
+}
+
+export type MyPostsPropsType = MapStatePropsType & MapDispatchToPropsType
+
+let mapStateToProps = (state: RootStateType): MapStatePropsType => {
+    return {
+        profilePage: state.profilePage
+    }
+}
+
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+    return {
+        addPostCallback: (newPostText: string) => {
+            dispatch(addPostAC(newPostText))
+        },
+        onChangeCallback: (newText: string) => {
+            dispatch(updateNewPostAC(newText))
+        }
+    }
 }
 
 
-const MyPostsContainer = (props: PropsType) => {
-
-    const addPostCallback = () => {
-        props.dispatch(addPostAC(props.newPostText));
-    };
-
-    const onChangeCallback = (newText: string) => {
-        props.dispatch(updateNewPostAC(newText));
-    };
-
-    return (
-        <MyPosts posts={props.posts} newPostText={props.newPostText} addPostCallback={addPostCallback} onChangeCallback={onChangeCallback} />
-    )
-};
+let MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
 
 export default MyPostsContainer;

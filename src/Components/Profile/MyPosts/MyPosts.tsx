@@ -1,21 +1,14 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {PostsType} from "../../../redux/ProfileReducer";
-
-type PropsType = {
-    posts: PostsType[]
-    newPostText: string
-    onChangeCallback: (newText: string) => void
-    addPostCallback: () => void
-}
+import {MyPostsPropsType} from "./MyPostsContainer";
 
 
-const MyPosts = (props: PropsType) => {
+const MyPosts = (props: MyPostsPropsType) => {
 
 
     const addPost = () => {
-        props.addPostCallback();
+        props.addPostCallback(props.profilePage.newPostText);
         //   props.dispatch(addPostAC(props.newPostText));
     };
 
@@ -26,7 +19,7 @@ const MyPosts = (props: PropsType) => {
     };
 
 
-    let postsElements = props.posts.map(elements =>
+    let postsElements = props.profilePage.posts.map(elements =>
         <Post id-={elements.id}
               message={elements.message}
               likesCount={elements.likesCount}/>);
@@ -35,7 +28,7 @@ const MyPosts = (props: PropsType) => {
         <div className={s.postsBlock}>
             My Posts
             <div>
-                <textarea className={s.textArea} value={props.newPostText} onChange={onChangePost}/>
+                <textarea className={s.textArea} value={props.profilePage.newPostText} onChange={onChangePost}/>
                 <button className={s.addPostBtn} onClick={addPost}>Add Post</button>
             </div>
             <div className={s.posts}>

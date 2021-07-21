@@ -1,6 +1,5 @@
 import {ActionTypes} from "./ReduxStore";
 
-
 export type DialogsPageType = {
     dialogs: DialogsType[]
     messages: MessagesType[]
@@ -33,7 +32,7 @@ let initialState = {
     ]
 }
 
-export const dialogsReducer = (state: DialogsPageType = initialState , action: ActionTypes) => {
+export const dialogsReducer = (state: DialogsPageType = initialState , action: ActionTypes): DialogsPageType => {
     switch (action.type) {
         case 'ADD_MESSAGE':
             let newMessage: MessagesType = {

@@ -2,34 +2,24 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogItem from "./DialogsItem/DialogsItem";
-import { DialogsType, MessagesType} from "../../redux/DialogsReducer";
+import {DialogsPropsType} from "./DialogsContainer";
 
-type PropsType = {
-    dialogs: DialogsType[]
-    messages: MessagesType[]
-    newMessageText: string
-    addMessageCallback: () => void
-    onChangeMessageCallback: (newText: string) => void
+const Dialogs = (props: DialogsPropsType) => {
 
-}
-
-
-const Dialogs = (props: PropsType) => {
-
-    let dialogsElements = props.dialogs.map(element =>
+    let dialogsElements = props.dialogsPage.dialogs.map(element =>
         <DialogItem name={element.name} id={element.id}/>);
 
-    let messagesElements = props.messages.map(element =>
+    let messagesElements = props.dialogsPage.messages.map(element =>
         <Message message={element.message} likesCount={element.likesCount}/>);
 
-    const addMessage = () => {
-        props.addMessageCallback()
+    const addMessageCallback = () => {
+        props.addMessage(props.dialogsPage.newMessageText)
         //  props.dispatch(addMessageAC(props.newMessageText));
     };
 
-    const onChangeMessage = (e: ChangeEvent<HTMLInputElement>) => {
+    const onChangeMessageCallback = (e: ChangeEvent<HTMLInputElement>) => {
         let newText = e.currentTarget.value;
-        props.onChangeMessageCallback(newText)
+        props.updateMessageText(newText)
        // props.dispatch(updateNewMessageAC(newText));
     };
 
@@ -43,8 +33,8 @@ const Dialogs = (props: PropsType) => {
                 {messagesElements}
             </div>
             <div>
-                <input onChange={onChangeMessage} type="text" value={props.newMessageText}/>
-                <button onClick={addMessage}>send message</button>
+                <input onChange={onChangeMessageCallback} type="text" value={props.dialogsPage.newMessageText}/>
+                <button onClick={addMessageCallback}>send message</button>
             </div>
         </div>
     );
