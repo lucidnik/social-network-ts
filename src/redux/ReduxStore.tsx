@@ -16,3 +16,7 @@ let rootReducer = combineReducers({
 });
 
 export let store = createStore(rootReducer);
+
+declare const window: any;
+
+window.store = store;

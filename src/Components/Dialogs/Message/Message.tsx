@@ -3,7 +3,6 @@ import React from "react";
 
 type PropsType = {
     message: string
-    likesCount: number
 }
 
 const Message = (props: PropsType) => {

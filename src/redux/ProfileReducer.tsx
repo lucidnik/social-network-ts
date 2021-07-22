@@ -18,28 +18,24 @@ let initState = {
         {id: 3, message: 'Media', likesCount: 33},
         {id: 4, message: 'Naruto', likesCount: 84},
     ]
-}
+};
 
-export const profileReducer = (state: ProfilePageType = initState , action: ActionTypes) => {
+export const profileReducer = (state: ProfilePageType = initState, action: ActionTypes) => {
 
     switch (action.type) {
         case 'ADD_POST':
-            let newPost: PostsType = {
-                id: 5,
-                message: action.newPostText,
-                likesCount: 1
+            return {
+                ...state,
+                posts: [...state.posts, {id: 5, message: action.newPostText, likesCount: 1}],
+                newPostText: ''
             };
-            state.posts.push(newPost);
-            state.newPostText = '';
-            break;
         case 'UPDATE_NEW_POST_TEXT':
-            state.newPostText = action.newText;
-            break;
+            return {
+                ...state, newPostText: action.newText
+            };
         default:
-            return  state
+            return state;
     }
-
-    return state;
 };
 
 export const addPostAC = (newPostText: string) => {

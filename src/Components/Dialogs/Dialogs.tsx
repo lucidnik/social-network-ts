@@ -7,20 +7,20 @@ import {DialogsPropsType} from "./DialogsContainer";
 const Dialogs = (props: DialogsPropsType) => {
 
     let dialogsElements = props.dialogsPage.dialogs.map(element =>
-        <DialogItem name={element.name} id={element.id}/>);
+        <DialogItem key={element.id} name={element.name} id={element.id}/>);
 
     let messagesElements = props.dialogsPage.messages.map(element =>
-        <Message message={element.message} likesCount={element.likesCount}/>);
+        <Message message={element.message}/>);
 
     const addMessageCallback = () => {
-        props.addMessage(props.dialogsPage.newMessageText)
+        props.addMessage(props.dialogsPage.newMessageText);
         //  props.dispatch(addMessageAC(props.newMessageText));
     };
 
     const onChangeMessageCallback = (e: ChangeEvent<HTMLInputElement>) => {
         let newText = e.currentTarget.value;
-        props.updateMessageText(newText)
-       // props.dispatch(updateNewMessageAC(newText));
+        props.updateMessageText(newText);
+        // props.dispatch(updateNewMessageAC(newText));
     };
 
     return (

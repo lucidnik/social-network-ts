@@ -3,9 +3,7 @@ import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
 
-
 const MyPosts = (props: MyPostsPropsType) => {
-
 
     const addPost = () => {
         props.addPostCallback(props.profilePage.newPostText);
@@ -38,4 +36,4 @@ const MyPosts = (props: MyPostsPropsType) => {
     );
 };
 
-export default MyPosts;
+export default MyPosts

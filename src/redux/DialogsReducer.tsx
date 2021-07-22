@@ -11,7 +11,7 @@ export type DialogsType = {
 }
 export type MessagesType = {
     message: string
-    likesCount: number
+    id: number
 }
 
 let initialState = {
@@ -24,32 +24,32 @@ let initialState = {
         {id: 5, name: 'Angelo'}
     ],
     messages: [
-        {message: 'Sup', likesCount: 1},
-        {message: 'Yo', likesCount: 1},
-        {message: 'Hey', likesCount: 1},
-        {message: 'Hi', likesCount: 1},
-        {message: 'Howdy', likesCount: 1},
+        {message: 'Sup', id: 1},
+        {message: 'Yo', id: 2},
+        {message: 'Hey', id: 3},
+        {message: 'Hi', id: 4},
+        {message: 'Howdy', id: 5},
     ]
-}
+};
 
-export const dialogsReducer = (state: DialogsPageType = initialState , action: ActionTypes): DialogsPageType => {
+export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionTypes): DialogsPageType => {
+
     switch (action.type) {
         case 'ADD_MESSAGE':
-            let newMessage: MessagesType = {
-                message: action.newMessageText,
-                likesCount: 5
+            return {
+                ...state,
+                newMessageText: '',
+                messages: [...state.messages, {id: 7, message: action.newMessageText}],
+                dialogs: [...state.dialogs, {id: 1, name: 'You'}]
             };
-            state.messages.push(newMessage);
-            state.newMessageText = '';
-            state.dialogs.push({id: 1, name: 'You'});
-            break;
         case 'UPDATE_NEW_MESSAGE_TEXT':
-            state.newMessageText = action.newText;
-            break;
+            return {
+                ...state,
+                newMessageText: action.newText
+            };
         default:
             return state;
     }
-    return state;
 };
 
 export const addMessageAC = (newMessageText: string) => {
