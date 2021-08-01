@@ -1,7 +1,7 @@
 import {combineReducers, createStore} from "redux";
 import {addMessageAC, dialogsReducer, updateNewMessageAC} from "./DialogsReducer";
 import {addPostAC, profileReducer, updateNewPostAC} from "./ProfileReducer";
-import {followAC, setUsersAC, unfollowAC, usersReducer} from "./UsersReducer";
+import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC, usersReducer} from "./UsersReducer";
 
 export type ActionTypes =
     ReturnType<typeof addPostAC>
@@ -11,6 +11,8 @@ export type ActionTypes =
     | ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setTotalUsersCountAC>
 
 export type RootStateType = ReturnType<typeof rootReducer>
 

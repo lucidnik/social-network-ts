@@ -1,3 +1,7 @@
 .photo {
     width: 80px;
 }
+
+.selectedPage {
+    background-color: red;
+}
