@@ -1,8 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
-import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, toggleIsFetchingAC, unfollowAC, usersType} from "../../redux/UsersReducer";
+import {follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unfollow, usersType} from "../../redux/UsersReducer";
 import {RootStateType} from "../../redux/ReduxStore";
-import {Dispatch} from "redux";
 import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../Common/Preloader/Preloader";
@@ -36,29 +35,6 @@ let mapStateToProps = (state: RootStateType): MapStatePropsType => {
     };
 };
 
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId));
-        },
-        unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId));
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users));
-        },
-        setCurrentPage: (selectedPage: number) => {
-            dispatch(setCurrentPageAC(selectedPage));
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount));
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching));
-        }
-    };
-};
-
 export class UsersAPIComponent extends React.Component<UsersPropsType> {
 
     componentDidMount() {
@@ -83,8 +59,8 @@ export class UsersAPIComponent extends React.Component<UsersPropsType> {
 
         return <>
             {this.props.isFetching ?
-               <Preloader/>
-               : null}
+                <Preloader/>
+                : null}
             <Users users={this.props.users} pageSize={this.props.pageSize} totalUsersCount={this.props.totalUsersCount}
                    currentPage={this.props.currentPage} pageClickedCallback={this.pageClickedCallback} follow={this.props.follow}
                    unfollow={this.props.unfollow}/>
@@ -92,5 +68,6 @@ export class UsersAPIComponent extends React.Component<UsersPropsType> {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+export default connect(mapStateToProps,
+    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching})(UsersAPIComponent);
 
