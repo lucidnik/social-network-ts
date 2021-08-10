@@ -1,3 +1,15 @@
 .profileBlock {
     padding: 10px
 }
+
+.profilePicture {
+    width: 80px;
+}
+
+.content img {
+    max-width: 100%;
+    height: auto;
+    width: 1200px;
+    border-radius: 6px;
+    opacity: 0.8;
+}

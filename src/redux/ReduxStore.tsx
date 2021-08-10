@@ -1,6 +1,6 @@
 import {combineReducers, createStore} from "redux";
 import {addMessage, dialogsReducer, updateNewMessageText} from "./DialogsReducer";
-import {addPostAC, profileReducer, updateNewPostAC} from "./ProfileReducer";
+import {addPostAC, profileReducer, setUserProfile, updateNewPostAC} from "./ProfileReducer";
 import {follow, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching, unfollow, usersReducer} from "./UsersReducer";
 
 export type ActionTypes =
@@ -13,7 +13,8 @@ export type ActionTypes =
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
-    | ReturnType<typeof toggleIsFetching >
+    | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setUserProfile>
 
 export type RootStateType = ReturnType<typeof rootReducer>
 

@@ -8,16 +8,13 @@ export type PostsType = {
 export type ProfilePageType = {
     posts: PostsType[]
     newPostText: string
+    profile: any
 }
 
 let initState = {
     newPostText: '',
-    posts: [
-        {id: 1, message: 'James Bond', likesCount: 53},
-        {id: 2, message: 'Alex Jones', likesCount: 16},
-        {id: 3, message: 'Media', likesCount: 33},
-        {id: 4, message: 'Naruto', likesCount: 84},
-    ]
+    posts: [],
+    profile: null
 };
 
 export const profileReducer = (state: ProfilePageType = initState, action: ActionTypes) => {
@@ -33,6 +30,10 @@ export const profileReducer = (state: ProfilePageType = initState, action: Actio
             return {
                 ...state, newPostText: action.newText
             };
+
+        case "SET_USER_PROFILE":
+            return  {...state, profile: action.profile}
+
         default:
             return state;
     }
@@ -48,5 +49,11 @@ export const updateNewPostAC = (newText: string) => {
     return {
         type: "UPDATE_NEW_POST_TEXT",
         newText: newText
+    } as const;
+};
+
+export const setUserProfile = (profile: any) => {
+    return {
+        type: 'SET_USER_PROFILE', profile
     } as const;
 };
